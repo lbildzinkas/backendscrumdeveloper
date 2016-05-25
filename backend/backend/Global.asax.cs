@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Conventions;
 
 namespace backend
 {
@@ -18,6 +20,8 @@ namespace backend
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            var pack = new ConventionPack() {new EnumRepresentationConvention(BsonType.String)};
+            ConventionRegistry.Register("EnumStringConvention", pack, t => true);
         }
     }
 }
